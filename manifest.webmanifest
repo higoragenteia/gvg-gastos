@@ -1,6 +1,6 @@
 {
   "id": "./",
-  "name": "GVG & ARTEFAL — GASTOS",
+  "name": "GVG & ARTEFAL — CONTROLE DE GASTOS",
   "short_name": "GASTOS",
   "description": "Controle de gastos GVG & ARTEFAL: despesas, orçamento, saldo e comprovantes.",
   "lang": "pt-BR",
@@ -22,19 +22,19 @@
   ],
   "icons": [
     {
-      "src": "icons/icon-192-v2.png",
+      "src": "icons/icon-192-gastos.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-512-v2.png",
+      "src": "icons/icon-512-gastos.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "icons/icon-maskable-512-v2.png",
+      "src": "icons/icon-maskable-512-gastos.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"

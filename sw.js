@@ -1,15 +1,15 @@
 /* GVG & ARTEFAL — PWA Gastos */
-const CACHE = 'gvg-gastos-pwa-v1';
+const CACHE = 'gvg-gastos-pwa-v2';
 const SHELL = [
   './',
   './index.html',
   './manifest.webmanifest',
-  './icons/favicon-v2.ico',
-  './icons/favicon-32-v2.png',
-  './icons/icon-192-v2.png',
-  './icons/icon-512-v2.png',
-  './icons/icon-maskable-512-v2.png',
-  './icons/apple-touch-icon-v2.png'
+  './icons/favicon-gastos.ico',
+  './icons/favicon-32-gastos.png',
+  './icons/icon-192-gastos.png',
+  './icons/icon-512-gastos.png',
+  './icons/icon-maskable-512-gastos.png',
+  './icons/apple-touch-icon-gastos.png'
 ];
 
 self.addEventListener('install', event => {
