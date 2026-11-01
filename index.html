@@ -10,9 +10,9 @@
   <meta name="apple-mobile-web-app-title" content="GASTOS">
   <title>GVG &amp; ARTEFAL — CONTROLE DE GASTOS</title>
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" href="./icons/favicon-gastos.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32-gastos.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon-gastos.png">
+  <link rel="icon" href="./icons/favicon-gastos-v3.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32-gastos-v3.png">
+  <link rel="apple-touch-icon" sizes="180x180" type="image/png" href="./icons/apple-touch-icon-gastos-v3.png">
   <style>
     :root{color-scheme:dark;--gold:#c8a24a;--gold2:#e8cd86;--navy:#0b2239;--ink:#111}
     *{box-sizing:border-box}
@@ -46,20 +46,6 @@
     .btn{border:1px solid #d7e2ea;background:#fff;color:#0b2239;border-radius:11px;padding:10px 13px;font-weight:800;font-size:12px;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
     .btn.primary{background:#0b2239;border-color:#0b2239;color:#fff}
     .note{background:#f4f8fb;border:1px solid #dce8ef;border-radius:11px;padding:10px 12px;color:#4c6474;font-size:11px;line-height:1.5}
-    .ios-landing{position:fixed;inset:0;z-index:2147483647;background:radial-gradient(circle at 50% 0,#123a60 0,#07141f 55%,#040b13 100%);display:flex;align-items:center;justify-content:center;padding:24px;overflow:auto}
-    .ios-landing.hidden{display:none}
-    .ios-card{width:min(100%,380px);text-align:center;color:#fff}
-    .ios-icon{width:104px;height:104px;border-radius:24px;border:1px solid rgba(232,205,134,.45);box-shadow:0 18px 44px rgba(0,0,0,.5);background:#0b2239}
-    .ios-card h1{font-size:27px;letter-spacing:-1.4px;margin:16px 0 2px}
-    .ios-card h1 span{color:#e8cd86}
-    .ios-sub{font-size:9px;letter-spacing:3.4px;color:#9fb4c3;font-weight:800;margin-bottom:18px}
-    .ios-text{font-size:13px;line-height:1.55;color:#c4d6e2;margin:0 0 16px}
-    .ios-steps{display:flex;flex-direction:column;gap:10px;text-align:left;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px;margin-bottom:16px}
-    .ios-step{display:flex;gap:10px;align-items:flex-start;font-size:12px;line-height:1.45;color:#dce8ef}
-    .ios-step > b{width:24px;height:24px;flex:0 0 24px;border-radius:50%;background:#c8a24a;color:#1b1405;display:grid;place-items:center;font-size:11px;font-weight:900}
-    .ios-step span b{font-weight:900;color:#fff}
-    .ios-open{display:block;background:linear-gradient(180deg,#f0d99b,#c8a24a);color:#1b1405;text-decoration:none;font-weight:950;font-size:13px;padding:14px;border-radius:12px}
-    .ios-note{font-size:10px;line-height:1.5;color:#7f95a4;margin:12px 0 0}
     @media(min-width:720px){.modal{align-items:center}.sheet{padding:26px 28px}}
     @media(max-width:420px){.install-btn{font-size:10px;padding:9px 11px}.open-fallback{font-size:8px}}
   </style>
@@ -85,22 +71,6 @@
     </div>
   </div>
 
-  <div id="iosLanding" class="ios-landing hidden">
-    <div class="ios-card">
-      <img class="ios-icon" src="./icons/apple-touch-icon-gastos.png" alt="GVG &amp; ARTEFAL">
-      <h1>GVG<span>&amp;</span>ARTEFAL</h1>
-      <div class="ios-sub">CONTROLE DE GASTOS</div>
-      <p class="ios-text">Instale o app na Tela de Início para abrir em tela cheia com o ícone oficial.</p>
-      <div class="ios-steps">
-        <div class="ios-step"><b>1</b><span>Toque em <b>Compartilhar</b> no Safari.</span></div>
-        <div class="ios-step"><b>2</b><span>Escolha <b>Adicionar à Tela de Início</b>.</span></div>
-        <div class="ios-step"><b>3</b><span>Confirme o nome <b>GASTOS</b>.</span></div>
-      </div>
-      <a class="ios-open" id="iosOpen" href="#">Abrir o app agora</a>
-      <p class="ios-note">No iPhone, o app abre no Google para manter o layout correto.</p>
-    </div>
-  </div>
-
   <script>
     (function(){
       'use strict';
@@ -119,17 +89,12 @@
       var deferred = null;
       var standalone = (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
 
-      // No iPhone/iPad o Safari não renderiza o Apps Script no iframe com o layout correto.
-      // No Safari, mostra a tela de instalação com o ícone; no app instalado, abre o Google.
-      if (isIOS()) {
-        if (standalone) { window.location.replace(APP_URL); return; }
-        document.getElementById('frameWrap').classList.add('hidden');
-        installBtn.classList.add('hidden');
-        openFallback.classList.add('hidden');
-        document.getElementById('iosLanding').classList.remove('hidden');
-        document.getElementById('iosOpen').href = APP_URL;
-        return;
-      }
+      window.addEventListener('message', function(event){
+        if(event.data && event.data.type === 'gvg-gastos-login' && event.data.logged){
+          clearTimeout(fallbackTimer);
+          openFallback.classList.add('hide');
+        }
+      });
 
       // iOS Safari dimensiona iframes com viewport próprio; fixar em pixels evita a tela "passando".
       function fitFrame(){

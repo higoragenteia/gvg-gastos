@@ -31,11 +31,14 @@ Abra a URL do GitHub Pages no Chrome e use **📲 Instalar**.
 
 ### iPhone
 
-No Safari, abra a URL e use **Compartilhar → Adicionar à Tela de Início**.
+No Safari, abra a URL do GitHub Pages e use **Compartilhar → Adicionar à Tela de Início**.
+O app instalado continua no endereço do GitHub Pages e abre o Apps Script dentro do iframe;
+não há redirecionamento para `script.google.com`.
 
-> No iPhone, o app instalado abre o Apps Script diretamente para manter o layout correto.
+Se o atalho antigo ainda mostrar o ícone anterior, apague-o da Tela de Início e adicione de novo,
+pois o iOS mantém o ícone em cache. Os arquivos `*-v3.png` foram versionados para forçar a troca.
 
 ## Atualizações
 
-O service worker usa `CACHE = 'gvg-gastos-pwa-v1'`. Ao publicar uma nova versão do shell,
+O service worker usa `CACHE = 'gvg-gastos-pwa-v4'`. Ao publicar uma nova versão do shell,
 incremente esse valor. O conteúdo do Apps Script é atualizado pelo próprio Apps Script.
