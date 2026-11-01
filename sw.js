@@ -1,5 +1,5 @@
 /* GVG & ARTEFAL — PWA Gastos */
-const CACHE = 'gvg-gastos-pwa-v2';
+const CACHE = 'gvg-gastos-pwa-v3';
 const SHELL = [
   './',
   './index.html',

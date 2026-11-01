@@ -26,6 +26,7 @@
       box-shadow:0 10px 28px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.45);cursor:pointer;
     }
     .install-btn.hidden{display:none!important}
+    .open-fallback.hide{display:none!important}
     .open-fallback{
       position:fixed;left:12px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:2147483646;
       background:rgba(11,34,57,.72);color:#dce8ef;border:1px solid rgba(255,255,255,.18);
@@ -68,7 +69,7 @@
     <iframe id="appFrame" title="GVG & ARTEFAL — Controle de Gastos" allow="clipboard-read; clipboard-write; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>
   </div>
 
-  <a id="openFallback" class="open-fallback" href="#" target="_blank" rel="noopener">Problemas para abrir? Toque aqui</a>
+  <a id="openFallback" class="open-fallback hide" href="#" target="_blank" rel="noopener">Problemas para abrir? Toque aqui</a>
   <button id="installBtn" class="install-btn" type="button">📲 Instalar</button>
 
   <div id="helpModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
@@ -109,6 +110,8 @@
       var helpModal = document.getElementById('helpModal');
       var helpSteps = document.getElementById('helpSteps');
       var openFallback = document.getElementById('openFallback');
+      var fallbackTimer = setTimeout(function(){ openFallback.classList.remove('hide'); }, 15000);
+      frame.addEventListener('load', function(){ clearTimeout(fallbackTimer); openFallback.classList.add('hide'); });
       var helpOpen = document.getElementById('helpOpen');
       openFallback.href = APP_URL;
       helpOpen.href = APP_URL;
